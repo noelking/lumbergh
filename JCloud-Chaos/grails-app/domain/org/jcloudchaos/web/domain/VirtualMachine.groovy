@@ -2,11 +2,12 @@ package org.jcloudchaos.web.domain
 
 class VirtualMachine {
 	
+	boolean canKill
+	String imageId
 	String hostName
 	String templateId
-	String templateName
-	String description
-	boolean ignore
+	String status
+	String ipAddress
 
     static constraints = {
 		hostName blank: false

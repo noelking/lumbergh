@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list job">
 			
+				<g:if test="${jobInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="job.name.label" default="Name" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${jobInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${jobInstance?.jcloudsUrl}">
 				<li class="fieldcontain">
 					<span id="jcloudsUrl-label" class="property-label"><g:message code="job.jcloudsUrl.label" default="Jclouds Url" /></span>
@@ -32,11 +41,29 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${jobInstance?.name}">
+				<g:if test="${jobInstance?.provider}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="job.name.label" default="Name" /></span>
+					<span id="provider-label" class="property-label"><g:message code="job.provider.label" default="Provider" /></span>
 					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${jobInstance}" field="name"/></span>
+						<span class="property-value" aria-labelledby="provider-label"><g:fieldValue bean="${jobInstance}" field="provider"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jobInstance?.user}">
+				<li class="fieldcontain">
+					<span id="user-label" class="property-label"><g:message code="job.user.label" default="User" /></span>
+					
+						<span class="property-value" aria-labelledby="user-label"><g:fieldValue bean="${jobInstance}" field="user"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jobInstance?.key}">
+				<li class="fieldcontain">
+					<span id="key-label" class="property-label"><g:message code="job.key.label" default="Key" /></span>
+					
+						<span class="property-value" aria-labelledby="key-label"><g:fieldValue bean="${jobInstance}" field="key"/></span>
 					
 				</li>
 				</g:if>

@@ -24,9 +24,15 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="name" title="${message(code: 'job.name.label', default: 'Name')}" />
+					
 						<g:sortableColumn property="jcloudsUrl" title="${message(code: 'job.jcloudsUrl.label', default: 'Jclouds Url')}" />
 					
-						<g:sortableColumn property="name" title="${message(code: 'job.name.label', default: 'Name')}" />
+						<g:sortableColumn property="provider" title="${message(code: 'job.provider.label', default: 'Provider')}" />
+					
+						<g:sortableColumn property="user" title="${message(code: 'job.user.label', default: 'User')}" />
+					
+						<g:sortableColumn property="key" title="${message(code: 'job.key.label', default: 'Key')}" />
 					
 					</tr>
 				</thead>
@@ -34,9 +40,15 @@
 				<g:each in="${jobInstanceList}" status="i" var="jobInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "jcloudsUrl")}</g:link></td>
+						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "name")}</g:link></td>
 					
-						<td>${fieldValue(bean: jobInstance, field: "name")}</td>
+						<td>${fieldValue(bean: jobInstance, field: "jcloudsUrl")}</td>
+					
+						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
+					
+						<td>${fieldValue(bean: jobInstance, field: "user")}</td>
+					
+						<td>${fieldValue(bean: jobInstance, field: "key")}</td>
 					
 					</tr>
 				</g:each>

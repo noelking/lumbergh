@@ -27,7 +27,7 @@ class JobController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'job.label', default: 'Job'), jobInstance.id])
-        redirect(action: "show", id: jobInstance.id)
+        redirect(action: "edit", id: jobInstance.id)
     }
 
     def show(Long id) {
@@ -45,7 +45,7 @@ class JobController {
         def jobInstance = Job.get(id)
         if (!jobInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'job.label', default: 'Job'), id])
-            redirect(action: "list")
+            redirect(action: "edit")
             return
         }
 
@@ -99,4 +99,23 @@ class JobController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def addVirtualMachine() {
+		def virtualMachineInstance = new VirtualMachine(params)
+	}
+	
+	def deleteVirtualMachine(Long id) {
+		def virtualMachineInstance = new VirtualMachine(params)
+	}
+	
+	def destroyAllMonsters = {
+		
+		def jobId = params.jobId
+		def imageId = params.imageId
+		
+		Job jobInstance = Job.get(jobId)
+		jobInstance.destroyAVirtualMachine(imageId)
+		
+		redirect action:"edit"
+	}
 }

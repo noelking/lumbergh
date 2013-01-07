@@ -95,16 +95,21 @@
     </dependency>
                     
 	<dependency>
-    <groupId>org.jclouds</groupId>
-    <artifactId>jclouds-allcompute</artifactId>
-    <version>1.5.3</version>
-  </dependency>
-  <dependency>
-    <groupId>org.jclouds</groupId>
-    <artifactId>jclouds-allblobstore</artifactId>
-    <version>1.5.3</version>
-  </dependency>
-
+                     <groupId>org.jclouds</groupId>
+                     <artifactId>jclouds-core</artifactId>
+                     <version>1.5.3</version>
+              </dependency>
+              <dependency>
+                     <groupId>org.jclouds</groupId>
+                     <artifactId>jclouds-compute</artifactId>
+                     <version>1.5.3</version>
+              </dependency>
+              <dependency>
+                     <groupId>org.jclouds.api</groupId>
+                     <artifactId>cloudstack</artifactId>
+                     <version>1.5.1</version>
+              </dependency>
+	
     </dependencies>
 
     <build>
@@ -160,19 +165,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>grails</id>
-            <name>grails</name>
-            <url>http://repo.grails.org/grails/core</url>
-        </repository>
-        <repository>
-            <id>grails-plugins</id>
-            <name>grails-plugins</name>
-            <url>http://repo.grails.org/grails/plugins</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>

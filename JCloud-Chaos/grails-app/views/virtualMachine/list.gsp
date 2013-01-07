@@ -20,20 +20,19 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			
 			<table>
 				<thead>
 					<tr>
 					
 						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
 					
-						<g:sortableColumn property="description" title="${message(code: 'virtualMachine.description.label', default: 'Description')}" />
+						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
+						
+						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
 					
-						<g:sortableColumn property="ignore" title="${message(code: 'virtualMachine.ignore.label', default: 'Ignore')}" />
-					
-						<g:sortableColumn property="templateId" title="${message(code: 'virtualMachine.templateId.label', default: 'Template Id')}" />
-					
-						<g:sortableColumn property="templateName" title="${message(code: 'virtualMachine.templateName.label', default: 'Template Name')}" />
-					
+						<g:sortableColumn property="Destroy" title="Destroy" />
+							
 					</tr>
 				</thead>
 				<tbody>
@@ -42,13 +41,11 @@
 					
 						<td><g:link action="show" id="${virtualMachineInstance.id}">${fieldValue(bean: virtualMachineInstance, field: "hostName")}</g:link></td>
 					
-						<td>${fieldValue(bean: virtualMachineInstance, field: "description")}</td>
+						<td>${fieldValue(bean: virtualMachineInstance, field: "ipAddress")}</td>
+						
+						<td>${fieldValue(bean: virtualMachineInstance, field: "status")}</td>
 					
-						<td><g:formatBoolean boolean="${virtualMachineInstance.ignore}" /></td>
-					
-						<td>${fieldValue(bean: virtualMachineInstance, field: "templateId")}</td>
-					
-						<td>${fieldValue(bean: virtualMachineInstance, field: "templateName")}</td>
+						<td><g:link action="destroyAllMonsters" id="${virtualMachineInstance.id}"  params="[id:virtualMachineInstance.templateId]"><g:img file="bomb.png" style="width:50px"/></g:link></td>
 					
 					</tr>
 				</g:each>
