@@ -1,5 +1,4 @@
 function updateJobWithVirtualMachine(killVmCheckBox, jobId) {
-	alert(createUpdateJobData(killVmCheckBox.value));
 	
 	url = "/JCloud-Chaos/jobvirtualmachine"
 	callback = "finishedPost"
