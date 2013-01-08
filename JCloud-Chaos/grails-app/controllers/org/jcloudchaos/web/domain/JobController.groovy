@@ -6,28 +6,22 @@ class JobController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [jobInstanceList: Job.list(params), jobInstanceTotal: Job.count()]
     }
 
-    def create() {
-        [jobInstance: new Job(params)]
-    }
 
     def save() {
         def jobInstance = new Job(params)
         if (!jobInstance.save(flush: true)) {
-            render(view: "create", model: [jobInstance: jobInstance])
+            render(view: "list", model: [jobInstance: jobInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'job.label', default: 'Job'), jobInstance.id])
-        redirect(action: "edit", id: jobInstance.id)
+        redirect(uri: "#createJob")
     }
 
     def show(Long id) {
@@ -37,7 +31,6 @@ class JobController {
             redirect(action: "list")
             return
         }
-
         [jobInstance: jobInstance]
     }
 
@@ -45,7 +38,7 @@ class JobController {
         def jobInstance = Job.get(id)
         if (!jobInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'job.label', default: 'Job'), id])
-            redirect(action: "edit")
+            redirect(action: "list")
             return
         }
 
@@ -78,7 +71,7 @@ class JobController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'job.label', default: 'Job'), jobInstance.id])
-        redirect(action: "show", id: jobInstance.id)
+        redirect(action: "list", id: jobInstance.id)
     }
 
     def delete(Long id) {
@@ -96,7 +89,7 @@ class JobController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'job.label', default: 'Job'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "list", id: id)
         }
     }
 	
@@ -108,7 +101,7 @@ class JobController {
 		Job jobInstance = Job.get(jobId)
 		jobInstance.destroyAVirtualMachine(imageId)
 		
-		redirect action:"edit"
+		redirect action:"list"
 	}
 	
 	def destroyRandomInstances() {

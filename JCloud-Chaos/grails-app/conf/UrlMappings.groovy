@@ -7,7 +7,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller: "job", action:"/create")
+		"/"(controller: "job", action:"/list")
 		"500"(view:'/error')
 		
 		"/jobvirtualmachine"(controller: "jobVirtualMachine", parseRequest: true) {

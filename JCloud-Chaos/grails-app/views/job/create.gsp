@@ -10,12 +10,15 @@
 	
 	  <section id="createJob">
       <div class="row">
-        <div class="span12">
+        <div class="span4">
           <h2><em><i class="icon-bookmark"></i> Setup Job</em> <a class="up anchorLink" href="#home"><i class="icon-chevron-up"></i></a></h2>
+        </div>
+         <div class="span8">
+          <h2><em><i class="icon-bookmark"></i> Available Jobs</em> <a class="up anchorLink" href="#home"><i class="icon-chevron-up"></i></a></h2>
         </div>
       </div>
       <div class="row">
-        <div class="span6">
+        <div class="span4">
         
         <div class="well">
             <span class="dropcap">1</span>  <h3>Create a new job to test your architecture</h3>
@@ -42,9 +45,40 @@
          </div>
         </div><!--/span-->
         
+        <div class="span8">
+        
+        <div class="well">
+            <span class="dropcap">2</span>  <h3>Run Job</h3>
+            <hr>
+        	<br/>
+        
+        	<table>
+				<thead>
+					<tr>
+						<g:sortableColumn property="name" title="${message(code: 'job.name.label', default: 'Name')}" />
+						<g:sortableColumn property="provider" title="${message(code: 'job.provider.label', default: 'Provider')}" />
+						<g:sortableColumn property="numberOfInstancesToDestroy" title="${message(code: 'job.numberOfInstancesToDestroy.label', default: 'No. Instances To Destroy')}" />
+						<g:sortableColumn property="launch" title="Launch Tha'" />
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${jobInstanceList}" status="i" var="jobInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "name")}</g:link></td>
+						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
+						<td>${fieldValue(bean: jobInstance, field: "numberOfInstancesToDestroy")}</td>
+						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]"><g:img file="rocket.png" style="width:50px"/></g:link></td>
+						
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+         </div>
+        </div><!--/span-->
+        
       </div><!--/row-->
     </section>
-	
 	
 	<section id="editJob">
       <div class="row">
@@ -56,7 +90,7 @@
         <div class="span4">
         
         <div class="well">
-            <span class="dropcap">2</span>  <h3>Change job settings</h3>
+            <span class="dropcap">3</span>  <h3>Change job settings</h3>
             <hr>
         <br/>
         
@@ -91,7 +125,7 @@
         <div class="span8">
         
         <div class="well">
-            <span class="dropcap">3</span>  <h3>Select the Virtual Machines that can be killed</h3>
+            <span class="dropcap">4</span>  <h3>Select the Virtual Machines that can be killed</h3>
             <hr>
         	<br/>
         
@@ -135,7 +169,62 @@
         
       </div><!--/row-->
     </section>
+    
+    <section id="serverStatus">
+      <div class="row">
+        <div class="span12">
+          <h2><em><i class="icon-bookmark"></i> Server Status</em> <a class="up anchorLink" href="#home"><i class="icon-chevron-up"></i></a></h2>
+        </div>
+      </div>
+      <div class="row">
 	
+	 <div class="span12">
+        
+        <div class="well">
+            <span class="dropcap">4</span>  <h3>Select the Virtual Machines that can be killed</h3>
+            <hr>
+        	<br/>
+        
+        	<table>
+				<thead>
+					<tr>
+						<g:sortableColumn property="canKill" title="${message(code: 'virtualMachine.canKill.label', default: 'Can Kill')}" />
+						
+						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
+					
+						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
+						
+						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
+					
+						<g:sortableColumn property="Destroy" title="Destroy" />
+							
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${jobInstance.listVms()}" status="i" var="virtualMachineInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						
+						<td> <input type="checkbox" name="killVm" value='${fieldValue(bean: virtualMachineInstance, field: "imageId")}' onchange="updateJobWithVirtualMachine(this, ${jobInstance?.id})"></input> </td>
+						
+						<td><g:link action="show" id="${virtualMachineInstance.id}">${fieldValue(bean: virtualMachineInstance, field: "hostName")}</g:link></td>
+					
+						<td>${fieldValue(bean: virtualMachineInstance, field: "ipAddress")}</td>
+						
+						<td>${fieldValue(bean: virtualMachineInstance, field: "status")}</td>
+					
+						<td><g:link action="destroyAllMonsters" id="${virtualMachineInstance.id}"  params="[imageId:virtualMachineInstance.imageId, jobId:jobInstance.id]"><g:img file="bomb.png" style="width:50px"/></g:link></td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			
+        
+         </div>
+        </div><!--/span-->
+        
+      </div><!--/row-->
+    </section>
 	
 		
 	</body>
