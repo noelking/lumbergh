@@ -101,10 +101,13 @@ class JobController {
     }
 	
 	def addVirtualMachine() {
-		def virtualMachineInstance = new VirtualMachine(params)
+		System.out.println("addVirtualMachine")
+		System.out.println(params)
+		params
 	}
 	
 	def deleteVirtualMachine(Long id) {
+		System.out.println("deleteVirtualMachine");
 		def virtualMachineInstance = new VirtualMachine(params)
 	}
 	

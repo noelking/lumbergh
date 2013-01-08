@@ -16,8 +16,8 @@ class Job {
 	String user
 	String key
 	
-	List<VirtualMachine> machinesToRunAgainst
-
+	static hasMany = [virtualMachines:VirtualMachine]
+	
     static constraints = {
 		name blank: false
 		jcloudsUrl blank: false
@@ -62,6 +62,28 @@ class Job {
 	def destroyAVirtualMachine(String id) {
 		ComputeService client = getComputeService();
 		client.destroyNode(id)
+	}
+	
+	def "find Virtual Machines By Image Id"(String imageId) {
+		
+		ComputeService client = getComputeService()
+		
+		for (ComputeMetadata node : client.listNodes()) {
+			VirtualMachine vm = new VirtualMachine()
+			
+			NodeMetadata metadata = client.getNodeMetadata(node.getId());
+			
+			vm.setHostName(metadata.getName())
+			vm.setImageId(metadata.getId())
+			vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
+			vm.setStatus(metadata.getStatus().toString())
+			
+			System.out.println("<-- " + imageId + " " + metadata.getId());
+			
+			if(vm.getImageId().equals(metadata.getId())) {
+				return vm
+			}
+		}
 	}
 	
 	def getComputeService(){

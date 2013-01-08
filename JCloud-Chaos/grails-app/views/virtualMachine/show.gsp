@@ -50,24 +50,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${virtualMachineInstance?.templateId}">
-				<li class="fieldcontain">
-					<span id="templateId-label" class="property-label"><g:message code="virtualMachine.templateId.label" default="Template Id" /></span>
-					
-						<span class="property-value" aria-labelledby="templateId-label"><g:fieldValue bean="${virtualMachineInstance}" field="templateId"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${virtualMachineInstance?.templateName}">
-				<li class="fieldcontain">
-					<span id="templateName-label" class="property-label"><g:message code="virtualMachine.templateName.label" default="Template Name" /></span>
-					
-						<span class="property-value" aria-labelledby="templateName-label"><g:fieldValue bean="${virtualMachineInstance}" field="templateName"/></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

@@ -45,7 +45,7 @@
 						
 						<td>${fieldValue(bean: virtualMachineInstance, field: "status")}</td>
 					
-						<td><g:link action="destroyAllMonsters" id="${virtualMachineInstance.id}"  params="[id:virtualMachineInstance.templateId]"><g:img file="bomb.png" style="width:50px"/></g:link></td>
+						<td><g:link action="destroyAllMonsters" id="${virtualMachineInstance.id}"  params="[id:virtualMachineInstance.imageId]"><g:img file="bomb.png" style="width:50px"/></g:link></td>
 					
 					</tr>
 				</g:each>

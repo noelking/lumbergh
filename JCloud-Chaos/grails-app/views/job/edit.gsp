@@ -66,7 +66,7 @@
 				<g:each in="${jobInstance.listVms()}" status="i" var="virtualMachineInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						
-						<td> <input type="checkbox" name="killVm" value='${fieldValue(bean: virtualMachineInstance, field: "templateId")}' onchange="updateJobWithVirtualMachine(this)"></input> </td>
+						<td> <input type="checkbox" name="killVm" value='${fieldValue(bean: virtualMachineInstance, field: "imageId")}' onchange="updateJobWithVirtualMachine(this, ${jobInstance?.id})"></input> </td>
 						
 						<td><g:link action="show" id="${virtualMachineInstance.id}">${fieldValue(bean: virtualMachineInstance, field: "hostName")}</g:link></td>
 					

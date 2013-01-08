@@ -26,13 +26,6 @@
 	<g:checkBox name="ignore" value="${virtualMachineInstance?.ignore}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: virtualMachineInstance, field: 'templateId', 'error')} ">
-	<label for="templateId">
-		<g:message code="virtualMachine.templateId.label" default="Template Id" />
-		
-	</label>
-	<g:textField name="templateId" value="${virtualMachineInstance?.templateId}"/>
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: virtualMachineInstance, field: 'templateName', 'error')} ">
 	<label for="templateName">
