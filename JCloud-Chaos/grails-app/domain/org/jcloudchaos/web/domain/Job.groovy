@@ -15,6 +15,7 @@ class Job {
 	String provider
 	String user
 	String key
+	String numberOfInstancesToDestroy
 	
 	static hasMany = [virtualMachines:VirtualMachine]
 	
@@ -24,6 +25,8 @@ class Job {
 		provider blank: false
 		user blank: false
 		key blank: false
+		numberOfInstancesToDestroy blank: false
+		
     }
 	
 	def listVms() {
@@ -80,7 +83,8 @@ class Job {
 			
 			System.out.println("<-- " + imageId + " " + metadata.getId());
 			
-			if(vm.getImageId().equals(metadata.getId())) {
+			if(imageId.equals(metadata.getId())) {
+				System.out.println("TRUE <-- " + imageId + " " + metadata.getId());
 				return vm
 			}
 		}
@@ -95,5 +99,35 @@ class Job {
 		ComputeService client = context.getComputeService()
 		client
 	}
+	
+	def destroyRandomInstances(){
+		Random randomGenerator = new Random();
+		System.out.println("instances String : " + numberOfInstancesToDestroy)
+		
+		Integer instances = new Integer(numberOfInstancesToDestroy)
+		
+		List<String> copiedList = new ArrayList<String>()
+		copiedList.addAll(virtualMachines)
+		
+		System.out.println("instances: " + instances)
+		while(instances > 0 && copiedList.size() > 0){
+			System.out.println("instances: " + instances)
+			
+			int randomNode = -1
+			
+			randomNode = randomGenerator.nextInt(copiedList.size())
+			
+			System.out.println(copiedList.size() + " size  - random entry " + randomNode)
+			System.out.println(copiedList)
+			VirtualMachine machinetoKill = copiedList.get(randomNode)
+			System.out.println(machinetoKill.getImageId())
+			ComputeService client = getComputeService()
+			client.destroyNode(machinetoKill.getImageId())
+			
+			copiedList.remove(randomNode)
+			instances = instances -1
+		}
+	}
+
 	
 }

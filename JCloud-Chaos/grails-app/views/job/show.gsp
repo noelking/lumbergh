@@ -67,7 +67,13 @@
 					
 				</li>
 				</g:if>
-			
+				
+				<li class="fieldcontain">
+					<span id="numberOfInstancesToDestroy-label" class="property-label"><g:message code="job.numberOfInstancesToDestroy.label" default="No. Instances To Destroy" /></span>
+					<span class="property-value" aria-labelledby="numberOfInstancesToDestroy-label"><g:fieldValue bean="${jobInstance}" field="numberOfInstancesToDestroy"/></span>
+				
+				</li>
+				
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

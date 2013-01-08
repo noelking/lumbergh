@@ -16,6 +16,7 @@
 			</ul>
 		</div>
 		<div id="list-job" class="content scaffold-list" role="main">
+		
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -25,14 +26,14 @@
 					<tr>
 					
 						<g:sortableColumn property="name" title="${message(code: 'job.name.label', default: 'Name')}" />
-					
-						<g:sortableColumn property="jcloudsUrl" title="${message(code: 'job.jcloudsUrl.label', default: 'Jclouds Url')}" />
+
 					
 						<g:sortableColumn property="provider" title="${message(code: 'job.provider.label', default: 'Provider')}" />
-					
-						<g:sortableColumn property="user" title="${message(code: 'job.user.label', default: 'User')}" />
-					
-						<g:sortableColumn property="key" title="${message(code: 'job.key.label', default: 'Key')}" />
+
+						
+						<g:sortableColumn property="numberOfInstancesToDestroy" title="${message(code: 'job.numberOfInstancesToDestroy.label', default: 'No. Instances To Destroy')}" />
+						
+						<g:sortableColumn property="launch" title="Launch Tha'" />
 					
 					</tr>
 				</thead>
@@ -41,15 +42,14 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "name")}</g:link></td>
-					
-						<td>${fieldValue(bean: jobInstance, field: "jcloudsUrl")}</td>
+
 					
 						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
-					
-						<td>${fieldValue(bean: jobInstance, field: "user")}</td>
-					
-						<td>${fieldValue(bean: jobInstance, field: "key")}</td>
-					
+						
+						<td>${fieldValue(bean: jobInstance, field: "numberOfInstancesToDestroy")}</td>
+						
+						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]"><g:img file="rocket.png" style="width:50px"/></g:link></td>
+						
 					</tr>
 				</g:each>
 				</tbody>

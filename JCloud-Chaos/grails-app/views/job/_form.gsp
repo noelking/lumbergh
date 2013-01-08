@@ -42,3 +42,12 @@
 	<g:textField name="key" required="" value="${jobInstance?.key}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'numberOfInstancesToDestroy', 'error')} required">
+	<label for="key">
+		<g:message code="job.numberOfInstancesToDestroy.label" default="No. Instances To Destroy" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="numberOfInstancesToDestroy" required="" value="${jobInstance?.numberOfInstancesToDestroy}"/>
+</div>
+
+

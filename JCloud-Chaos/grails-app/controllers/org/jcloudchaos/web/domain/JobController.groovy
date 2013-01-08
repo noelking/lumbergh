@@ -100,17 +100,6 @@ class JobController {
         }
     }
 	
-	def addVirtualMachine() {
-		System.out.println("addVirtualMachine")
-		System.out.println(params)
-		params
-	}
-	
-	def deleteVirtualMachine(Long id) {
-		System.out.println("deleteVirtualMachine");
-		def virtualMachineInstance = new VirtualMachine(params)
-	}
-	
 	def destroyAllMonsters = {
 		
 		def jobId = params.jobId
@@ -121,4 +110,13 @@ class JobController {
 		
 		redirect action:"edit"
 	}
+	
+	def destroyRandomInstances() {
+		
+	   def jobId = params.jobId
+	   Job jobInstance = Job.get(jobId)
+	   jobInstance.destroyRandomInstances()
+	   redirect action:"list"
+   }
+
 }
