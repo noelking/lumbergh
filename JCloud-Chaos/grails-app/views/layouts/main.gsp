@@ -12,19 +12,147 @@
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+	body {
+	  padding-top: 60px;
+	  padding-bottom: 40px;
+	}
+	</style>
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+  <!--[if lt IE9 ]  <link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.css"><![endif]-->
+  <link rel="stylesheet" href="fancybox/jquery.fancybox.css?v=2.0.6" type="text/css" media="screen" />
+  <link rel="stylesheet" href="css/style.css">
+  
+	<!--[if lt IE 9]>
+	<script src="js/html5-3.4-respond-1.1.0.min.js"></script>
+	<![endif]-->
+  
+		
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:javascript library="jquery" plugin="jquery"/>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
-		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-		<g:javascript library="application"/>
-		<g:javascript library="chaos"/>
-		<r:layoutResources />
+		
+		<body data-spy="scroll" data-target="#primary-nav">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">Menu</a>
+        <a class="brand" href="#"> Pandemonium Paddy </a>
+        <div id="primary-nav" class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a class="anchorLink" href="#home">Home</a></li>
+            <li><a class="anchorLink" href="#createJob">Create a Job</a></li>
+            <li><a class="anchorLink" href="#editJob">Update Job info</a></li>
+            <li><a class="anchorLink" href="#runJob">Run the Job</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/container-->
+    </div><!--/navbar-inner-->
+  </div><!--/navbar-->
+    
+  <header id="home">
+    <div class="container">
+      <div class="row">
+        <div class="span12 headline">
+          <h1>Build architectures that survive failures</h1>
+          <i class="description">Test your cloud app here</i>
+        </div><!--/span12-->
+      </div><!--/row-->
+      <div class="row animated fadeInUp">
+        <div class="span12">
+          <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+              <!--slide-->
+              <div class="active item">
+                <div class="row">
+                  <div class="span6">
+                    <img src="images/cloud1.png" alt=""/>
+                  </div>
+                  <div class="span4">
+                    <h2>Test your architecture</h2>
+                    <p>Build your architecture to survive failure</p>
+                    
+                    <a class="btn btn-red" href="#createJob">Awesome let me try!</a>
+                  </div>
+                </div>
+              </div>
+              <!--slide-->
+              <div class="item">
+                <div class="row">
+                  <div class="span6 animated rotateInDownLeft">
+                    <img src="assets/slide-half-2.png" alt=""/>
+                  </div>
+                  <div class="span4 animated rotateInUpRight">
+                    <h2>56 CSS3 Animations</h2>
+                    <p>You can do a whole bunch of other stuff with animate.css when you combine it with jQuery or add your own CSS rules.</p>
+                    <p>animate.css is a bunch of cool, fun, and cross-browser cool animations for you to use in your projects. Great for emphasis, home pages, sliders, and general just-add-water-awesomeness. Dynamically add animations using jQuery with ease.</p>
+                    <p>Don't hesitate to start creating your own creative work with this top notch feature.</p>
+                    <a class="btn btn-red" href="#">Want to start now?</a>
+                  </div>
+                </div>
+              </div>
+              </div><!--/carousel-inner-->
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div><!--/myCarousel-->
+        </div><!--/span12-->
+      </div><!--/row-->
+    </div><!--/container-->
+  </header>
+  
+  <div class="container"><!--main content-->
+    <div class="strip">
+      <div class="row">
+        <div class="span12">
+          <span class="call-to-action">Test the availability of your architecture</span>
+        </div>
+      </div>
+    </div>
+    
+    <g:layoutBody/>
+    
+  
+  
+  </div><!--/main content-->
+      
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="span2">
+					<h3>Developers</h3>
+					<ul>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Conor Hawkshaw</a></li>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Niall O'Reilly</a></li>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Noel King</a></li>
+					</ul>
+				</div>
+      </div><!--/row-->
+    </div> <!-- /container -->
+    <div class="base">
+      <div class="container">
+        <p>All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <g:javascript library="application"/>
+  <g:javascript library="chaos"/>
+  <r:layoutResources />
+    
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.anchor.js" type="text/javascript"></script>
+  <script type="text/javascript" src="fancybox/jquery.fancybox.pack.js?v=2.0.6"></script>
+  <script src="js/script.js"></script>
+		
 	</body>
 </html>

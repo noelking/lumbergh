@@ -33,7 +33,7 @@ class Job {
 		if("is Enough Info For Virtual Machine Available"()) {
 			return "list Server Virtual Machines"();
 		} else {
-			System.out.println("Not enough info");
+			return new ArrayList<VirtualMachine>();
 		}
 	}
 	
@@ -47,17 +47,19 @@ class Job {
 		
 		ComputeService client = getComputeService()
 		
-		for (ComputeMetadata node : client.listNodes()) {
-			VirtualMachine vm = new VirtualMachine()
-			
-			NodeMetadata metadata = client.getNodeMetadata(node.getId());
-			
-			vm.setHostName(metadata.getName())
-			vm.setImageId(metadata.getId())
-			vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
-			vm.setStatus(metadata.getStatus().toString())
-			
-			vms.add(vm)
+		if(client != null) {
+			for (ComputeMetadata node : client.listNodes()) {
+				VirtualMachine vm = new VirtualMachine()
+				
+				NodeMetadata metadata = client.getNodeMetadata(node.getId());
+				
+				vm.setHostName(metadata.getName())
+				vm.setImageId(metadata.getId())
+				vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
+				vm.setStatus(metadata.getStatus().toString())
+				
+				vms.add(vm)
+			}
 		}
 		vms
 	}
@@ -81,7 +83,6 @@ class Job {
 			vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
 			vm.setStatus(metadata.getStatus().toString())
 			
-			System.out.println("<-- " + imageId + " " + metadata.getId());
 			
 			if(imageId.equals(metadata.getId())) {
 				System.out.println("TRUE <-- " + imageId + " " + metadata.getId());
@@ -91,13 +92,16 @@ class Job {
 	}
 	
 	def getComputeService(){
-		ComputeServiceContext context = ContextBuilder.newBuilder(provider)
-				.endpoint(jcloudsUrl)
-				.credentials(user, key)
-				.buildView(ComputeServiceContext.class)
-
-		ComputeService client = context.getComputeService()
-		client
+		if(jcloudsUrl != null) {
+			ComputeServiceContext context = ContextBuilder.newBuilder(provider)
+					.endpoint(jcloudsUrl)
+					.credentials(user, key)
+					.buildView(ComputeServiceContext.class)
+	
+			ComputeService client = context.getComputeService()
+			client
+		}
+		return null
 	}
 	
 	def destroyRandomInstances(){
