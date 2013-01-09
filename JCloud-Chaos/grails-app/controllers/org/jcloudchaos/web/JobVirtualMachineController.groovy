@@ -26,7 +26,9 @@ class JobVirtualMachineController {
 	}
 	
 	def get() {
+		System.out.println("id value " + params.id);
 		def jobInstance = Job.get(params.id)
-		render jobInstance as JSON
+		System.out.println("vms size  " +  jobInstance.listVms().size())
+		render jobInstance.listVms() as JSON
 	}
 }

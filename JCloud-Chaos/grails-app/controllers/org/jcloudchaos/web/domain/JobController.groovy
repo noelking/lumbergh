@@ -8,8 +8,6 @@ class JobController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [jobInstanceList: Job.list(params), jobInstanceTotal: Job.count()]

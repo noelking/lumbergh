@@ -89,12 +89,10 @@
       <div class="row">
         <div class="span4">
         
-        <div class="well">
+        <div class="well" id="editJobForm">
             <span class="dropcap">3</span>  <h3>Change job settings</h3>
             <hr>
-        <br/>
-        
-        
+        	<br/>
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -106,7 +104,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
+			<g:form method="post">
 				<g:hiddenField name="id" value="${jobInstance?.id}" />
 				<g:hiddenField name="version" value="${jobInstance?.version}" />
 				<fieldset class="form">

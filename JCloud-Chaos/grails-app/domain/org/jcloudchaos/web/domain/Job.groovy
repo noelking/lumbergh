@@ -42,12 +42,15 @@ class Job {
 	}
 	
 	def "list Server Virtual Machines"() {
-		
+		System.out.println("Listing the vms ==============================");
 		List<VirtualMachine> vms = new ArrayList<VirtualMachine>()
 		
 		ComputeService client = getComputeService()
 		
 		if(client != null) {
+			
+			System.out.println("Client for the the vms ==============================");
+			
 			for (ComputeMetadata node : client.listNodes()) {
 				VirtualMachine vm = new VirtualMachine()
 				

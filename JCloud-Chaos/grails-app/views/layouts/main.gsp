@@ -49,7 +49,7 @@
           <ul class="nav">
             <li class="active"><a class="anchorLink" href="#home">Home</a></li>
             <li><a class="anchorLink" href="#createJob">Create a Job</a></li>
-            <li><a class="anchorLink" href="#editJob">Update Job info</a></li>
+            <li><a class="anchorLink" id="editFormLink" href="#editJob">Update Job info</a></li>
             <li><a class="anchorLink" href="#createJob">Run the Job</a></li>
             <li><a class="anchorLink" href="#serverStatus">Cloud Status</a></li>
           </ul>
