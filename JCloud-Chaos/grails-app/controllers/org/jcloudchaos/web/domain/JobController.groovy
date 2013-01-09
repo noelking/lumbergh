@@ -1,11 +1,14 @@
 package org.jcloudchaos.web.domain
 
+import grails.converters.JSON;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class JobController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)

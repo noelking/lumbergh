@@ -55,6 +55,7 @@
         	<table>
 				<thead>
 					<tr>
+						<g:sortableColumn property="name" title="${message(code: 'job.id.label', default: 'Id')}" />
 						<g:sortableColumn property="name" title="${message(code: 'job.name.label', default: 'Name')}" />
 						<g:sortableColumn property="provider" title="${message(code: 'job.provider.label', default: 'Provider')}" />
 						<g:sortableColumn property="numberOfInstancesToDestroy" title="${message(code: 'job.numberOfInstancesToDestroy.label', default: 'No. Instances To Destroy')}" />
@@ -63,13 +64,12 @@
 				</thead>
 				<tbody>
 				<g:each in="${jobInstanceList}" status="i" var="jobInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}" onclick="handleJobClick(this)">
+						<td>${fieldValue(bean: jobInstance, field: "id")}</td>
 						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "name")}</g:link></td>
 						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
 						<td>${fieldValue(bean: jobInstance, field: "numberOfInstancesToDestroy")}</td>
 						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]"><g:img file="rocket.png" style="width:50px"/></g:link></td>
-						
 					</tr>
 				</g:each>
 				</tbody>

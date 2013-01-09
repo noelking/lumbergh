@@ -24,4 +24,9 @@ class JobVirtualMachineController {
 		def virtualMachineInstance = new VirtualMachine(params)
 		System.out.println(virtualMachineInstance);
 	}
+	
+	def get() {
+		def jobInstance = Job.get(params.id)
+		render jobInstance as JSON
+	}
 }
