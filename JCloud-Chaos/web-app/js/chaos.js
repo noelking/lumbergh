@@ -24,15 +24,10 @@ function finishedPost(data) {
 	console.log('Output from save' + JSON.stringify(data));
 }
 
-function finishedPost(data) {
-	console.log('Output from save' + JSON.stringify(data));
-}
-
 function handleJobClick(row) {
 		var selectedId = row.cells.item(0).firstChild.nodeValue;
 		url = "/JCloud-Chaos/jobvirtualmachine?id="+ selectedId;
-		callback = "finishedPost"
-		ajaxCall('GET', url, callback);
+		ajaxCall('GET', url, finishedPost);
 }
 
 function ajaxCall(type, url, callback) {
