@@ -33,10 +33,17 @@ function handleJobClick(row) {
 function displayJob(data) {
 	populateEditJobForm(data);
 	moveToEditJob();
-	
-	var selectedId = data.id;
+	displayServerStatus(data.id);
+}
+
+function displayServerStatus(selectedId) {
 	url = "/JCloud-Chaos/jobvirtualmachine?id="+ selectedId;
-	ajaxCall('GET', url, finishedPost);
+	ajaxCall('GET', url, populateTables);
+}
+
+function populateTables(data) {
+	populateJobVMTable(data);
+	populateServerStatusTable(data);
 }
 
 function populateEditJobForm(data) {
@@ -67,4 +74,43 @@ function ajaxCall(type, url, callback) {
             alert('error ' + jqXHR.reponseText + "\n"  + textStatus + "\n" + errorThrown);
         }
 	});
+}
+
+function populateJobVMTable(virtualMachines) {
+	
+	$('#jobVirtualMachineTable tbody > tr').remove();
+	var tableBody = $('#jobVirtualMachineTable tbody');
+	
+
+	for(var currentVm = 0; currentVm < virtualMachines.length; currentVm++) {
+		
+		var virtualMachine = virtualMachines[currentVm];
+		if(virtualMachine.status=='RUNNING') {
+			var rowData = '<tr><td><input type="checkbox" name="killVm" onchange="updateJobWithVirtualMachine(this, '+virtualMachine.id+')"></input></td>';
+			rowData += '<td>'+virtualMachine.hostName+'</td>';
+			rowData += '<td>'+virtualMachine.ipAddress+'</td>';
+			rowData += '<td>'+virtualMachine.status+'</td>';
+			rowData += '<td></td></tr>';
+			tableBody.append(rowData)
+		}
+	}
+	
+}
+
+function populateServerStatusTable(virtualMachines) {
+	
+	$('#serverStatusTable tbody > tr').remove();
+	var tableBody = $('#serverStatusTable tbody');
+	
+	for(var currentVm = 0; currentVm < virtualMachines.length; currentVm++) {
+		
+		var virtualMachine = virtualMachines[currentVm];
+		var rowData = '<tr>';
+		rowData += '<td>'+virtualMachine.hostName+'</td>';
+		rowData += '<td>'+virtualMachine.ipAddress+'</td>';
+		rowData += '<td>'+virtualMachine.status+'</td>';
+		rowData += '</tr>';
+		tableBody.append(rowData)
+	}
+	
 }

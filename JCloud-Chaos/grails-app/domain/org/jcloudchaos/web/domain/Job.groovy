@@ -42,14 +42,11 @@ class Job {
 	}
 	
 	def "list Server Virtual Machines"() {
-		System.out.println("Listing the vms ==============================");
 		List<VirtualMachine> vms = new ArrayList<VirtualMachine>()
 		
 		ComputeService client = getComputeService()
 		
 		if(client != null) {
-			
-			System.out.println("Client for the the vms ==============================");
 			
 			for (ComputeMetadata node : client.listNodes()) {
 				VirtualMachine vm = new VirtualMachine()
@@ -76,7 +73,7 @@ class Job {
 		
 		ComputeService client = getComputeService()
 		
-		for (ComputeMetadata node : client.listNodes()) {
+		for (ComputeMetadata node : runningNodes) {
 			VirtualMachine vm = new VirtualMachine()
 			
 			NodeMetadata metadata = client.getNodeMetadata(node.getId());
@@ -88,23 +85,18 @@ class Job {
 			
 			
 			if(imageId.equals(metadata.getId())) {
-				System.out.println("TRUE <-- " + imageId + " " + metadata.getId());
 				return vm
 			}
 		}
 	}
 	
 	def getComputeService(){
-		if(jcloudsUrl != null) {
 			ComputeServiceContext context = ContextBuilder.newBuilder(provider)
 					.endpoint(jcloudsUrl)
 					.credentials(user, key)
 					.buildView(ComputeServiceContext.class)
-	
 			ComputeService client = context.getComputeService()
 			client
-		}
-		return null
 	}
 	
 	def destroyRandomInstances(){

@@ -52,7 +52,7 @@
             <hr>
         	<br/>
         
-        	<table>
+        	<table> 
 				<thead>
 					<tr>
 						<g:sortableColumn property="name" title="${message(code: 'job.id.label', default: 'Id')}" />
@@ -127,23 +127,18 @@
             <hr>
         	<br/>
         
-        	<table>
+        	<table id="jobVirtualMachineTable">
 				<thead>
 					<tr>
 						<g:sortableColumn property="canKill" title="${message(code: 'virtualMachine.canKill.label', default: 'Can Kill')}" />
-						
 						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
-					
 						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
-						
 						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
-					
 						<g:sortableColumn property="Destroy" title="Destroy" />
-							
 					</tr>
 				</thead>
 				<tbody>
-				
+					
 				</tbody>
 			</table>
 			
@@ -165,23 +160,17 @@
 	 <div class="span12">
         
         <div class="well">
-            <span class="dropcap">4</span>  <h3>Select the Virtual Machines that can be killed</h3>
+            <span class="dropcap">5</span>  <h3>Monitor server status</h3>
             <hr>
         	<br/>
         
-        	<table>
+        	<table id="serverStatusTable">
 				<thead>
 					<tr>
-						<g:sortableColumn property="canKill" title="${message(code: 'virtualMachine.canKill.label', default: 'Can Kill')}" />
 						
 						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
-					
 						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
-						
 						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
-					
-						<g:sortableColumn property="Destroy" title="Destroy" />
-							
 					</tr>
 				</thead>
 				<tbody>
