@@ -73,7 +73,7 @@ class Job {
 		
 		ComputeService client = getComputeService()
 		
-		for (ComputeMetadata node : runningNodes) {
+		for (ComputeMetadata node : lient.listNodes()) {
 			VirtualMachine vm = new VirtualMachine()
 			
 			NodeMetadata metadata = client.getNodeMetadata(node.getId());

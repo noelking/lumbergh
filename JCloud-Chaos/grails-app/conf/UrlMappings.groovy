@@ -11,7 +11,7 @@ class UrlMappings {
 		"500"(view:'/error')
 		
 		"/jobvirtualmachine"(controller: "jobVirtualMachine", parseRequest: true) {
-			action = [DELETE: "deleteVirtualMachine", POST: "addVirtualMachine" , GET: "get"]
+			action = [DELETE: "deleteVirtualMachine", POST: "addVirtualMachine" , GET: "getVirtualMachines"]
 		}
 		
 		"/jobrest"(controller: "jobRest", parseRequest: true) {

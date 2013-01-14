@@ -134,7 +134,6 @@
 						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
 						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
 						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
-						<g:sortableColumn property="Destroy" title="Destroy" />
 					</tr>
 				</thead>
 				<tbody>
@@ -171,6 +170,7 @@
 						<g:sortableColumn property="hostName" title="${message(code: 'virtualMachine.hostName.label', default: 'Host Name')}" />
 						<g:sortableColumn property="ipAddress" title="${message(code: 'virtualMachine.ipAddress.label', default: 'IP Address')}" />
 						<g:sortableColumn property="status" title="${message(code: 'virtualMachine.status.label', default: 'Status')}" />
+						<g:sortableColumn property="Destroy" title="Destroy" />
 					</tr>
 				</thead>
 				<tbody>

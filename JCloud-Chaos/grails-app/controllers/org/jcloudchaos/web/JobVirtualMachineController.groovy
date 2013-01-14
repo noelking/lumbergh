@@ -15,20 +15,19 @@ class JobVirtualMachineController {
 			jobInstance.addToVirtualMachines(virtualMachineInstance)
 			jobInstance.save(flush: true, failOnError:true)
 		}
-		System.out.println(jobInstance.virtualMachines.size() + "-->");
 		render jobInstance as JSON
 	}
 	
 	def deleteVirtualMachine(Long id) {
-		System.out.println("deleteVirtualMachine");
 		def virtualMachineInstance = new VirtualMachine(params)
-		System.out.println(virtualMachineInstance);
 	}
 	
-	def get() {
-		System.out.println("id value " + params.id);
+	def getVirtualMachines() {
 		def jobInstance = Job.get(params.id)
-		System.out.println("vms size  " +  jobInstance.listVms().size())
-		render jobInstance.listVms() as JSON
+		List<VirtualMachine> virtualMachines = jobInstance.listVms()
+		def runningMachines = virtualMachines.findAll { obj -> 
+			obj.getStatus() == "RUNNING"
+		}
+		render runningMachines as JSON
 	}
 }
