@@ -18,5 +18,9 @@ class UrlMappings {
 			action = [GET: "get"]
 		}
 		
+		"/server"(controller: "server", parseRequest: true) {
+			action = [GET: "getVirtualMachinesForServer"]
+		} 
+		
 	}
 }

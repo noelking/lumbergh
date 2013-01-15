@@ -1,3 +1,6 @@
+
+var servers = new Array();
+
 function updateJobWithVirtualMachine(jobId, imageId) {
 	url = "/JCloud-Chaos/jobvirtualmachine";
 	callback = "finishedPost";
@@ -78,10 +81,10 @@ function populateJobVMTable(virtualMachines) {
 
 		var virtualMachine = virtualMachines[currentVm];
 		if (virtualMachine.status == 'RUNNING') {
-			var rowStyle = ((currentVm % 2) == 0 ? 'even' : 'odd');
-			var rowData = '<tr><td><input  class="'
-					+ rowStyle
-					+ '" type="checkbox" name="killVm" onchange="updateJobWithVirtualMachine('
+			var rowStyle = getRowStyle(currentVm);
+			var rowData = '<tr class="'
+				+ rowStyle
+				+ '"><td><input type="checkbox" name="killVm" onchange="updateJobWithVirtualMachine('
 					+ jobId + ', \'' + virtualMachine.imageId
 					+ '\')"></input></td>';
 			rowData += '<td>' + virtualMachine.hostName + '</td>';
@@ -102,40 +105,81 @@ function populateServerStatusTable(virtualMachines) {
 	for ( var currentVm = 0; currentVm < virtualMachines.length; currentVm++) {
 
 		var virtualMachine = virtualMachines[currentVm];
-		var rowData = '<tr>';
+		
+		handleVirtualMachineStatus(virtualMachine);
+		
+		var rowStyle = getRowStyle(currentVm);
+		var rowData = '<tr class="'
+			+ rowStyle
+			+ '">';
 		rowData += '<td>' + virtualMachine.hostName + '</td>';
 		rowData += '<td>' + virtualMachine.ipAddress + '</td>';
-		rowData += '<td>' + virtualMachine.status + '</td>';
+		rowData += '<td class='+getStatusStyle(virtualMachine.status)+'> ' + virtualMachine.status + '</td>';
 		rowData += '<td></td></tr>';
 		tableBody.append(rowData)
 	}
 }
 
+function handleVirtualMachineStatus(virtualMachine) {
+	if(virtualMachine.status != "RUNNING") {
+		loadServerDownGritter(virtualMachine.hostName);
+	}
+}
+
+function getRowStyle(currentVm) {
+	if ((currentVm % 2) == 0)
+		return 'even';
+	else
+		return 'odd'	
+}
+
+function getStatusStyle(status) {
+	if(status != "RUNNING") 
+		return 'stopped'
+	return '';
+}
+
 function requestServerStatusData(selectedId) {
 
-	var timeInMs = 5000
-	var url = "/JCloud-Chaos/jobvirtualmachine?id=" + selectedId
-	$.ajax({
-		type : 'GET',
-		url : url,
-		dataType : 'json',
-		cache : false,
-		data : null,
+	var jobId = $('#editJobForm form input#id').val();
+	
+	if(jobId != '') {
+		var timeInMs = 10000
+		var url = "/JCloud-Chaos/server?id=" + selectedId
+		$.ajax({
+			type : 'GET',
+			url : url,
+			dataType : 'json',
+			cache : false,
+			data : null,
+	
+			success : function(data, textStatus) {
+				populateServerStatusTable(data);
+				
+				setTimeout(function() {
+					requestServerStatusData(selectedId);
+				}, timeInMs);
+	
+			},
+	
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus);
+			}
+	
+		});
+	}
+}
 
-		success : function(data, textStatus) {
-			
-			populateServerStatusTable(data);
-			
-			setTimeout(function() {
-				requestServerStatusData(selectedId);
-			}, timeInMs);
 
-		},
-
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(textStatus);
-		}
-
+function loadServerDownGritter(hostName) {
+	$.gritter.add({
+		title: 'Server Down',
+		text: '<span class="stopped">'+hostName+'</span> is not running',
+		// (string | optional) the image to display on the left
+		image: 'images/alert.png',
+		sticky: false,
+		fade_in_speed: 100, // how fast notifications fade in (string or int)
+		fade_out_speed: 100, // how fast the notices fade out
+		time: 5000
 	});
-
 }

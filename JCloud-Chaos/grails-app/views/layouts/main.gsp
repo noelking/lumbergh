@@ -14,6 +14,9 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.gritter.css" />
+		
 	<style>
 	body {
 	  padding-top: 60px;
@@ -152,6 +155,8 @@
   <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.anchor.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/jquery.gritter.js"></script>
+  
   <script type="text/javascript" src="fancybox/jquery.fancybox.pack.js?v=2.0.6"></script>
   <script src="js/script.js"></script>
 		
