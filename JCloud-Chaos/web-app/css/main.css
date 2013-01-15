@@ -55,3 +55,8 @@ th:hover, tr:hover {
 	color: #444444;
 	text-decoration: underline;
 }
+
+.simulateImg {
+	 width: 300px;
+	 float: right;
+}
