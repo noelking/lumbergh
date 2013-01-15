@@ -80,8 +80,10 @@
                     <img src="images/cloud1.png" alt=""/>
                   </div>
                   <div class="span4">
-                    <h2>Test your architecture</h2>
-                    <p>Build your architecture to survive failure</p>
+                    <h2>Don't fail</h2>
+                    <p>In modern online sites, revenue is generated 24/7 and thus availability of these sites much meet this core business requirement.  Currently leveraging most IAAS providers there is no automatic or even real way to test / verify the resilience of your architecture within a build/development pipeline.  This tool looks to fill a serious under tested and underappreciated  concept of failures in non-production environments (that are usually very stable under small load).  This tool will simulate failures to provide an accurate view of resilience of your architecture.   Utilising JClouds functionality this tools sits on top offering chaos capabilities to CloudStack, OpenStack, EC2, VMWare ESX and even VirtualBox.  
+As this tool exposes rest services, server failure testing can now be automatically brought into nightly Jenkins tests.  This tool moves failures from reactive production head scratching to proactive pre-production solutions to ensure the highest SLA’s.
+</p>
                     
                     <a class="btn btn-red" href="#createJob">Awesome let me try!</a>
                   </div>
@@ -133,9 +135,9 @@
         <div class="span2">
 					<h3>Developers</h3>
 					<ul>
-						<li><a href="https://github.com/chawkshaw" title=""><i class="icon-external-link"></i> Conor Hawkshaw</a></li>
-						<li><a href="https://github.com/noreilly" title=""><i class="icon-external-link"></i> Niall O'Reilly</a></li>
-						<li><a href="https://github.com/noelking" title=""><i class="icon-external-link"></i> Noel King</a></li>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Conor Hawkshaw</a></li>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Niall O'Reilly</a></li>
+						<li><a href="#" title=""><i class="icon-external-link"></i> Noel King</a></li>
 					</ul>
 				</div>
       </div><!--/row-->
