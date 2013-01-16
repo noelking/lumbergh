@@ -73,7 +73,7 @@ class Job {
 		
 		ComputeService client = getComputeService()
 		
-		for (ComputeMetadata node : lient.listNodes()) {
+		for (ComputeMetadata node : client.listNodes()) {
 			VirtualMachine vm = new VirtualMachine()
 			
 			NodeMetadata metadata = client.getNodeMetadata(node.getId());
@@ -82,7 +82,6 @@ class Job {
 			vm.setImageId(metadata.getId())
 			vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
 			vm.setStatus(metadata.getStatus().toString())
-			
 			
 			if(imageId.equals(metadata.getId())) {
 				return vm

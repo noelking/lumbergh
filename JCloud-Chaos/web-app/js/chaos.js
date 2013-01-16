@@ -3,7 +3,7 @@ var servers = new Array();
 
 function updateJobWithVirtualMachine(jobId, imageId) {
 	url = "/JCloud-Chaos/jobvirtualmachine";
-	callback = "finishedPost";
+	callback = "updatedJob";
 	var jobData = createUpdateJobData(jobId, imageId);
 	ajaxCall('POST', url, callback, jobData);
 }
@@ -15,8 +15,8 @@ function createUpdateJobData(jobId, imageId) {
 	});
 }
 
-function finishedPost(data) {
-	alert('Output from save' + JSON.stringify(data));
+function updatedJob(data) {
+	loadGritter('images/success.png', 'Job successfully updated', '<span class="stopped">'+data.name+'</span> has  been updated');
 }
 
 function handleJobClick(row) {
@@ -64,8 +64,9 @@ function ajaxCall(type, url, callback, data) {
 		dataType : "json",
 		contentType : 'application/json',
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('error ' + jqXHR.reponseText + "\n" + textStatus + "\n"
-					+ errorThrown);
+			var errorMessage = 'error ' + jqXHR.reponseText + " - " + textStatus + " - " + errorThrown;
+			loadGritter('images/error.png', 'Application Error', errorMessage);
+			
 		}
 	});
 }
@@ -115,14 +116,14 @@ function populateServerStatusTable(virtualMachines) {
 		rowData += '<td>' + virtualMachine.hostName + '</td>';
 		rowData += '<td>' + virtualMachine.ipAddress + '</td>';
 		rowData += '<td class='+getStatusStyle(virtualMachine.status)+'> ' + virtualMachine.status + '</td>';
-		rowData += '<td></td></tr>';
+		rowData += '<td><img src="'+getStoppedImage(virtualMachine.status)+'" width="25px"/></td></tr>';
 		tableBody.append(rowData)
 	}
 }
 
 function handleVirtualMachineStatus(virtualMachine) {
 	if(virtualMachine.status != "RUNNING") {
-		loadServerDownGritter(virtualMachine.hostName);
+		loadGritter('images/alert.png', 'Server down', '<span class="stopped">'+virtualMachine.hostName+'</span> is not running');
 	}
 }
 
@@ -137,6 +138,12 @@ function getStatusStyle(status) {
 	if(status != "RUNNING") 
 		return 'stopped'
 	return '';
+}
+
+function getStoppedImage(status) {
+	if(status != "RUNNING") 
+		return 'images/stopped.png'
+	return 'images/stop.png';
 }
 
 function requestServerStatusData(selectedId) {
@@ -163,7 +170,8 @@ function requestServerStatusData(selectedId) {
 			},
 	
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				alert(textStatus);
+				var errorMessage = 'error ' + XMLHttpRequest.reponseText + " - " + textStatus + " - " + errorThrown;
+				loadGritter('images/error.png', 'Application Error', errorMessage);
 			}
 	
 		});
@@ -171,15 +179,15 @@ function requestServerStatusData(selectedId) {
 }
 
 
-function loadServerDownGritter(hostName) {
+function loadGritter(image, title, message) {
+	
 	$.gritter.add({
-		title: 'Server Down',
-		text: '<span class="stopped">'+hostName+'</span> is not running',
-		// (string | optional) the image to display on the left
-		image: 'images/alert.png',
+		title: title,
+		text: message,
+		image: image,
 		sticky: false,
-		fade_in_speed: 100, // how fast notifications fade in (string or int)
-		fade_out_speed: 100, // how fast the notices fade out
+		fade_in_speed: 1000, // how fast notifications fade in (string or int)
+		fade_out_speed: 1000, // how fast the notices fade out
 		time: 5000
 	});
 }

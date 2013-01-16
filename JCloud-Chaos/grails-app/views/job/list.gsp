@@ -66,10 +66,10 @@
 				<g:each in="${jobInstanceList}" status="i" var="jobInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}" onclick="handleJobClick(this)">
 						<td>${fieldValue(bean: jobInstance, field: "id")}</td>
-						<td><g:link action="show" id="${jobInstance.id}">${fieldValue(bean: jobInstance, field: "name")}</g:link></td>
+						<td><span class="stopped">${fieldValue(bean: jobInstance, field: "name")}</span></td>
 						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
 						<td>${fieldValue(bean: jobInstance, field: "numberOfInstancesToDestroy")}</td>
-						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]"><g:img file="rocket.png" style="width:50px"/></g:link></td>
+						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]" ><g:img file="play.png" style="width:25px"/></g:link></td>
 					</tr>
 				</g:each>
 				</tbody>
