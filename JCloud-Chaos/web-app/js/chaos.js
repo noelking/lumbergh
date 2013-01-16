@@ -71,6 +71,28 @@ function ajaxCall(type, url, callback, data) {
 	});
 }
 
+function updateJobVMList() {
+	
+	var jobId = $('#editJobForm form input#id').val();
+	
+	url = "/JCloud-Chaos/virtualMachineInfo?id=" + jobId;
+	ajaxCall('GET', url, populateCanKillMachine, null)
+}
+
+function populateCanKillMachine(virtualMachines) {
+	var rows = $('#jobVirtualMachineTable tbody > tr');
+	rows.each(updateCanKill(virtualMachines, $(this)));
+}
+
+function updateCanKill(virtualMachines, row) {
+	loadGritter('images/success.png', 'Info', row.find('input').attr('name'));
+	for(var currentMachine = 0; currentMachine < virtualMachines.length; currentMachine++) {
+		var machine = virtualMachines[currentMachine];
+		loadGritter('images/success.png', 'VM Info', machine.hostName);
+	}
+	
+}
+
 function populateJobVMTable(virtualMachines) {
 
 	$('#jobVirtualMachineTable tbody > tr').remove();
@@ -95,6 +117,8 @@ function populateJobVMTable(virtualMachines) {
 			tableBody.append(rowData)
 		}
 	}
+	
+	updateJobVMList();
 
 }
 

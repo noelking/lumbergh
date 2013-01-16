@@ -11,7 +11,10 @@ class JobVirtualMachineController {
 		Job jobInstance = Job.get(params.jobId);
 		VirtualMachine virtualMachineInstance = jobInstance."find Virtual Machines By Image Id"(params.imageId);
 		
-		if(virtualMachineInstance != null) {
+		//currently saved instances
+		List<VirtualMachine> virtualMachines = jobInstance.getVirtualMachines()
+		
+		if(virtualMachineInstance != null && !virtualMachines.contains(virtualMachineInstance)) {
 			jobInstance.addToVirtualMachines(virtualMachineInstance)
 			jobInstance.save(flush: true, failOnError:true)
 		}
@@ -24,10 +27,18 @@ class JobVirtualMachineController {
 	
 	def getVirtualMachines() {
 		def jobInstance = Job.get(params.id)
-		List<VirtualMachine> virtualMachines = jobInstance.listVms()
+		def virtualMachines = jobInstance.listVms() 
+		def jobMachines = jobInstance.getVirtualMachines()
+		
 		def runningMachines = virtualMachines.findAll { obj -> 
-			obj.getStatus() == "RUNNING"
-		}
+			obj.getStatus() == "RUNNING" || jobMachines.contains(obj)
+		} 
 		render runningMachines as JSON
+	}
+	
+	def getSelectedVirtualMachines() {
+		def jobInstance = Job.get(params.id)
+		def virtualMachines = jobInstance.getVirtualMachines()
+		render virtualMachines as JSON
 	}
 }

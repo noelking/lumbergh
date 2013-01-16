@@ -76,7 +76,7 @@
               <!--slide-->
               <div class="active item">
                 <div class="row">
-                  <div class="span6">
+                  <div class="span6 animated fadeInUpBig">
                     <img src="images/cloud1.png" alt=""/>
                   </div>
                   <div class="span4">
@@ -92,16 +92,13 @@
               <!--slide-->
               <div class="item">
                 <div class="row">
-                  <div class="span6 animated rotateInDownLeft">
-                    <img src="assets/slide-half-2.png" alt=""/>
-                  </div>
                   <div class="span4 animated rotateInUpRight">
                     <h2>Simulate actual failures</h2>
                     <p>This tool will simulate failures to provide an accurate view of resilience of your architecture.   Utilising JClouds functionality this tools sits on top offering chaos capabilities to CloudStack, OpenStack, EC2, VMWare ESX and even VirtualBox.  
 As this tool exposes rest services, server failure testing can now be automatically brought into nightly Jenkins tests.  This tool moves failures from reactive production head scratching to proactive pre-production solutions to ensure the highest SLA’s.</p>
                     <a class="btn btn-red" href="#createJob">Want to start now?</a>
                   </div>
-                   <div class="span6">
+                   <div class="span6  animated rotateInDownLeft">
                     <img src="images/computercrash.png" alt="" class="simulateImg"/>
                   </div>
                 </div>

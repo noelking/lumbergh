@@ -14,6 +14,10 @@ class UrlMappings {
 			action = [DELETE: "deleteVirtualMachine", POST: "addVirtualMachine" , GET: "getVirtualMachines"]
 		}
 		
+		"/virtualMachineInfo"(controller: "jobVirtualMachine", parseRequest: true) {
+			action = [GET: "getSelectedVirtualMachines"]
+		}
+		
 		"/jobrest"(controller: "jobRest", parseRequest: true) {
 			action = [GET: "get"]
 		}

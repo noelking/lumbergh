@@ -11,6 +11,7 @@ class VirtualMachine {
 	static belongsTo = [job:Job]
 
     static constraints = {
-		hostName blank: false
+		hostName unique: true
+		imageId unique: true
     }
 }

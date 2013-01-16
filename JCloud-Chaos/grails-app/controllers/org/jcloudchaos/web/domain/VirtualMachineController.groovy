@@ -8,7 +8,9 @@ import org.jclouds.compute.domain.NodeMetadata
 
 
 class VirtualMachineController {
-	def list() {
+	def scaffold = true
+
+	def list(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		[virtualMachineInstanceList: VirtualMachine.list(), virtualMachineInstanceTotal: VirtualMachine.count()]
 	}
