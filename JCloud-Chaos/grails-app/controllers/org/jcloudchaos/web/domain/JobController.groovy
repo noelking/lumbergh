@@ -36,12 +36,4 @@ class JobController {
 		redirect action:"list"
 	}
 	
-	def destroyRandomInstances() {
-		
-	   def jobId = params.jobId
-	   Job jobInstance = Job.get(jobId)
-	   jobInstance.destroyRandomInstances()
-	   redirect action:"list"
-   }
-
 }

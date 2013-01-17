@@ -55,7 +55,10 @@ class Job {
 				
 				vm.setHostName(metadata.getName())
 				vm.setImageId(metadata.getId())
-				vm.setIpAddress(metadata.getPrivateAddresses().iterator().next().toString())
+				
+				final Iterator privateAddresses = metadata.getPrivateAddresses().iterator();
+				if(privateAddresses.hasNext())
+					vm.setIpAddress(privateAddresses.next().toString())
 				vm.setStatus(metadata.getStatus().toString())
 				
 				vms.add(vm)
@@ -99,6 +102,9 @@ class Job {
 	}
 	
 	def destroyRandomInstances(){
+		
+		def killList = [] as List
+		
 		Random randomGenerator = new Random();
 		System.out.println("instances String : " + numberOfInstancesToDestroy)
 		
@@ -121,10 +127,11 @@ class Job {
 			System.out.println(machinetoKill.getImageId())
 			ComputeService client = getComputeService()
 			client.destroyNode(machinetoKill.getImageId())
-			
+			killList.add(machinetoKill.getHostName())
 			copiedList.remove(randomNode)
 			instances = instances -1
 		}
+		killList
 	}
 
 	

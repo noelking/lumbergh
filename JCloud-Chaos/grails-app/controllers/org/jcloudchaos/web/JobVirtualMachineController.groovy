@@ -12,13 +12,24 @@ class JobVirtualMachineController {
 		VirtualMachine virtualMachineInstance = jobInstance."find Virtual Machines By Image Id"(params.imageId);
 		
 		//currently saved instances
-		List<VirtualMachine> virtualMachines = jobInstance.getVirtualMachines()
+		def virtualMachines = jobInstance.getVirtualMachines()
 		
-		if(virtualMachineInstance != null && !virtualMachines.contains(virtualMachineInstance)) {
+		if(virtualMachineInstance != null && !isVirtualMachineSelected(virtualMachines, virtualMachineInstance.hostName)) {
 			jobInstance.addToVirtualMachines(virtualMachineInstance)
 			jobInstance.save(flush: true, failOnError:true)
 		}
 		render jobInstance as JSON
+	}
+	
+	private boolean isVirtualMachineSelected(def virtualMachines, String hostName) {
+		
+		int hostCount = 0
+		for(VirtualMachine machine : virtualMachines) {
+			if(machine.hostName == hostName)
+				hostCount++;
+		}
+		
+		return 0 < hostCount
 	}
 	
 	def deleteVirtualMachine(Long id) {

@@ -19,7 +19,7 @@ class UrlMappings {
 		}
 		
 		"/jobrest"(controller: "jobRest", parseRequest: true) {
-			action = [GET: "get"]
+			action = [GET: "get", POST: "destroyRandomInstances" ]
 		}
 		
 		"/server"(controller: "server", parseRequest: true) {

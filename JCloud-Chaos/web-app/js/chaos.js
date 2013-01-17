@@ -15,6 +15,24 @@ function createUpdateJobData(jobId, imageId) {
 	});
 }
 
+function runJob(jobId) {
+	url = "/JCloud-Chaos/jobrest";
+	callback = "killAlert";
+	var jobData = createRunJobData(jobId);
+	ajaxCall('POST', url, callback, jobData);
+}
+
+function createRunJobData(jobId) {
+	return JSON.stringify({
+		"jobId" : jobId
+	});
+}
+
+function killAlert(data) {
+	alert('Kill');
+	loadGritter('images/success.png', 'Kill success', data);
+}
+
 function updatedJob(data) {
 	loadGritter('images/success.png', 'Job successfully updated', '<span class="stopped">'+data.name+'</span> has  been updated');
 }
@@ -81,16 +99,25 @@ function updateJobVMList() {
 
 function populateCanKillMachine(virtualMachines) {
 	var rows = $('#jobVirtualMachineTable tbody > tr');
-	rows.each(updateCanKill(virtualMachines, $(this)));
+	
+	for(var rowNum = 0; rowNum < rows.length; rowNum++) {
+		
+		var hostName = rows[rowNum].cells[1].firstChild.nodeValue;
+		if(isHostSelected(virtualMachines,hostName)) {
+			rows[rowNum].cells[0].firstChild.checked = true;
+		}
+	}
 }
 
-function updateCanKill(virtualMachines, row) {
-	loadGritter('images/success.png', 'Info', row.find('input').attr('name'));
+function isHostSelected(virtualMachines, hostName) {
+	
+	var hostCount = 0;
 	for(var currentMachine = 0; currentMachine < virtualMachines.length; currentMachine++) {
 		var machine = virtualMachines[currentMachine];
-		loadGritter('images/success.png', 'VM Info', machine.hostName);
+		if(hostName == machine.hostName)
+			hostCount++;
 	}
-	
+	return hostCount > 0
 }
 
 function populateJobVMTable(virtualMachines) {
@@ -103,19 +130,18 @@ function populateJobVMTable(virtualMachines) {
 	for ( var currentVm = 0; currentVm < virtualMachines.length; currentVm++) {
 
 		var virtualMachine = virtualMachines[currentVm];
-		if (virtualMachine.status == 'RUNNING') {
-			var rowStyle = getRowStyle(currentVm);
-			var rowData = '<tr class="'
-				+ rowStyle
-				+ '"><td><input type="checkbox" name="killVm" onchange="updateJobWithVirtualMachine('
-					+ jobId + ', \'' + virtualMachine.imageId
-					+ '\')"></input></td>';
-			rowData += '<td>' + virtualMachine.hostName + '</td>';
-			rowData += '<td>' + virtualMachine.ipAddress + '</td>';
-			rowData += '<td>' + virtualMachine.status + '</td>';
-			rowData += '</tr>';
-			tableBody.append(rowData)
-		}
+		var rowStyle = getRowStyle(currentVm);
+		var rowData = '<tr class="'
+			+ rowStyle
+			+ '"><td><input type="checkbox" name="killVm" onchange="updateJobWithVirtualMachine('
+				+ jobId + ', \'' + virtualMachine.imageId
+				+ '\')"></input></td>';
+		rowData += '<td>' + virtualMachine.hostName + '</td>';
+		rowData += '<td>' + virtualMachine.ipAddress + '</td>';
+		rowData += '<td>' + virtualMachine.status + '</td>';
+		rowData += '</tr>';
+		tableBody.append(rowData);
+		
 	}
 	
 	updateJobVMList();
@@ -210,8 +236,8 @@ function loadGritter(image, title, message) {
 		text: message,
 		image: image,
 		sticky: false,
-		fade_in_speed: 1000, // how fast notifications fade in (string or int)
-		fade_out_speed: 1000, // how fast the notices fade out
-		time: 5000
+		fade_in_speed: 300, // how fast notifications fade in (string or int)
+		fade_out_speed: 500, // how fast the notices fade out
+		time: 3000
 	});
 }

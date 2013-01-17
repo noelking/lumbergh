@@ -69,7 +69,7 @@
 						<td><span class="stopped">${fieldValue(bean: jobInstance, field: "name")}</span></td>
 						<td>${fieldValue(bean: jobInstance, field: "provider")}</td>
 						<td>${fieldValue(bean: jobInstance, field: "numberOfInstancesToDestroy")}</td>
-						<td><g:link action="destroyRandomInstances" id="destroy ${jobInstance.id}"  params="[jobId:jobInstance.id]" ><g:img file="play.png" style="width:25px"/></g:link></td>
+						<td><img src="images/play.png" style="width:25px" onclick="runJob(${jobInstance.id})"/></td>
 					</tr>
 				</g:each>
 				</tbody>
