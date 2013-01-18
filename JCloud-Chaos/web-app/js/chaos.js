@@ -54,6 +54,8 @@ function displayServerStatus(selectedId) {
 	
 	url = "/JCloud-Chaos/jobvirtualmachine?id=" + selectedId;
 	ajaxCall('GET', url, populateJobVMTable, null);
+	
+	requestJobServerData();
 }
 
 function populateEditJobForm(data) {
@@ -118,6 +120,38 @@ function isHostSelected(virtualMachines, hostName) {
 			hostCount++;
 	}
 	return hostCount > 0
+}
+
+function requestJobServerData() {
+
+	var jobId = $('#editJobForm form input#id').val();
+	
+	if(jobId != '') {
+		var timeInMs = 10000
+		var url = "/JCloud-Chaos/jobvirtualmachine?id=" + jobId
+		$.ajax({
+			type : 'GET',
+			url : url,
+			dataType : 'json',
+			cache : false,
+			data : null,
+	
+			success : function(data, textStatus) {
+				populateJobVMTable(data);
+				
+				setTimeout(function() {
+					requestJobServerData();
+				}, timeInMs);
+	
+			},
+	
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				var errorMessage = 'error ' + XMLHttpRequest.reponseText + " - " + textStatus + " - " + errorThrown;
+				loadGritter('images/error.png', 'Application Error', errorMessage);
+			}
+	
+		});
+	}
 }
 
 function populateJobVMTable(virtualMachines) {
